@@ -18,3 +18,25 @@ mongoose.connection
 .on("open", () => {console.log("Connected to Mongo")})
 .on("close", () => {console.log("Disconnected from Mongo")})
 .on("error", (error) => {console.log(error)})
+
+// Create Our Fruits Model
+
+// destructure Schema and model into their own variables
+const {Schema, model} = mongoose
+// const Schema = mongoose.Schema
+// const model = mongoose.model
+
+
+// Scema - Shape of the Data
+const fruitSchema = new Schema({
+    name: String,
+    color: String,
+    readyToEat: Boolean
+})
+
+// const basketSchema = new Schema({
+//     fruits: [fruitSchema]
+// })
+
+// Model - object for interacting with the db
+const Fruit = model("Fruit", fruitSchema)
