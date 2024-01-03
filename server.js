@@ -105,6 +105,27 @@ app.get("/fruits", async (req, res) => {
   }
 });
 
+// New Route
+app.get("/fruits/new", (req,res) => {
+    res.render("fruits/new.ejs")
+})
+
+// Create Route (Post to /fruits)
+app.post("/fruits", async (req, res) => {
+    try {
+        // check if readyToEat should be true
+        // expression ? true : false (ternary operator)
+        req.body.readyToEat = req.body.readyToEat === "on" ? true : false
+        //create the fruit
+        await Fruit.create(req.body)
+        // redirect back to main page
+        res.redirect("/fruits")
+    } catch (error) {
+    console.log("-----", error.message, "------");
+    res.status(400).send("error, read logs for details");
+    }
+})
+
 // Show Route (Get to /fruits/:id)
 app.get("/fruits/:id", async (req, res) => {
     try {
