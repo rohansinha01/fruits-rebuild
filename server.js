@@ -144,7 +144,7 @@ app.get("/fruits/:id/edit", async (req, res) => {
 // Update Route (Put to /fruits/:id)
 app.put("/fruits/:id", async (req,res) => {
     try {
-        // get teh id 
+        // get the id 
         const id = req.params.id
         // update to ready to eat in req.body
         req.body.readyToEat = req.body.readyToEat === "on" ? true : false
@@ -158,6 +158,15 @@ app.put("/fruits/:id", async (req,res) => {
     }
 })
 
+// The Delete Route (delete to /fruits/:id)
+app.delete("/fruits/:id", async (req,res) => {
+    // get the id
+    const id = req.params.id
+    // delete the fruit
+    await Fruit.findByIdAndDelete(id)
+    // redirect to the main page
+    res.redirect("/fruits")
+})
 
 // Show Route (Get to /fruits/:id)
 app.get("/fruits/:id", async (req, res) => {
