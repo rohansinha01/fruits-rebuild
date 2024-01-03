@@ -105,6 +105,23 @@ app.get("/fruits", async (req, res) => {
   }
 });
 
+// Show Route (Get to /fruits/:id)
+app.get("/fruits/:id", async (req, res) => {
+    try {
+        //get the id from params
+        const id = req.params.id
+
+        // find the particular fruit from the database
+        const fruit = await Fruit.findById(id)
+
+        // render the template with the fruit
+        res.render("fruits/show.ejs", {fruit})
+    } catch (error) {
+    console.log("-----", error.message, "------");
+    res.status(400).send("error, read logs for details");
+    }
+})
+
 ///////////////////////////////////////////////////////
 // Server Listener
 ////////////////////////////////////////////////////////
